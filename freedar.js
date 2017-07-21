@@ -1,5 +1,11 @@
 const reddit = require('concierge/reddit');
 
+const ensure = (obj, prop, def) => {
+	if (!obj[prop]) {
+		obj[prop] = def;
+	}
+};
+
 class FreedarModule {
 	notify(title, url) {
 		const apis = this.platform.getIntegrationApis();
@@ -43,9 +49,7 @@ class FreedarModule {
 			checkFrequency: 3600000
 		};
 		for (let key in defaultConfig) {
-			if (!this.config[key]) {
-				this.config[key] = defaultConfig[key];
-			}
+			ensure(this.config, key, defaultConfig[key]);
 		}
 		this.checkForGames();
 	}
