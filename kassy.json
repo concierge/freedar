@@ -1,0 +1,9 @@
+{
+	"name": "freedar",
+	"version": "1.0.0",
+	"startup": "freedar.js",
+	"command": "freedar",
+	"help": [
+		["{{commandPrefix}}freedar", "Subscribe/unsubscribe to free game notifications."]
+	]
+}
