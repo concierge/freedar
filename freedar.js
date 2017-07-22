@@ -1,4 +1,19 @@
 const reddit = require('concierge/reddit');
+const searchTerms = [/[^0-9]100%/i, /free($|[^a-z])/i, /[^0-9]\$0[^0-9]/i];
+const ignoreTerms = [
+    /\[PSN\]|ps[0-9]/i,
+    /XBOX/i,
+    /playstation/i,
+    /free (weekend|play)/i,
+    /[a-z](-)?free/i,
+    /rent/i, /[^1][0-9]{2}%/i,
+    /physical/i,
+    /shipping|pickup/i,
+    /up to/i,
+    /\$[1-9][0-9\.]*/i,
+    /with (\S+)? purchase/i,
+    /used/i
+];
 
 const ensure = (obj, prop, def) => {
 	if (!obj[prop]) {
@@ -22,8 +37,6 @@ class FreedarModule {
 	async checkForGames() {
 		LOG.debug('Checking for free games.');
 		const results = await reddit('gamedeals', 200);
-		const searchTerms = [/[^0-9]100%/i, /free($|[^a-z])/i];
-		const ignoreTerms = [/\[PSN\]/i, /XBOX/i, /playstation/i, /free (weekend|play|shipping)/i, /[a-z](-)?free/i, /rent/i];
 		for (let result of results) {
 			LOG.silly(`Checking title "${result.data.title}".`);
 			const includeCheck = searchTerms.some(s => s.test(result.data.title));

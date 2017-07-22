@@ -1,6 +1,6 @@
 {
 	"name": "freedar",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"startup": "freedar.js",
 	"command": "freedar",
 	"help": [
