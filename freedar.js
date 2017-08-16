@@ -27,9 +27,11 @@ class FreedarModule {
 		for (let int in this.config.listeners) {
 			const api = apis[int];
 			for (let thread of this.config.listeners[int]) {
-				LOG.debug(`Notifying "${int}:${thread}" about a free game.`);
-				api.sendMessage(title, thread);
-				api.sendUrl(url, thread);
+                try {
+                    LOG.debug(`Notifying "${int}:${thread}" about a free game.`);
+                    api.sendMessage(title, thread);
+                    api.sendUrl(url, thread);
+                } finally {}
 			}
 		}
 	}
