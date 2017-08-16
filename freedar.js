@@ -31,7 +31,7 @@ class FreedarModule {
                     LOG.debug(`Notifying "${int}:${thread}" about a free game.`);
                     api.sendMessage(title, thread);
                     api.sendUrl(url, thread);
-                } finally {}
+                } catch (e) {}
 			}
 		}
 	}
